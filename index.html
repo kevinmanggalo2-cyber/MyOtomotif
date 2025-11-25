@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyOtomotif - Jual Beli Motor & Mobil Sport</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        .navbar {
+            background-color: #000000 !important;
+            border-bottom: 2px solid #DC0E0E;
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: #FFFFFF !important;
+            letter-spacing: 1px;
+        }
+
+        .navbar-brand span {
+            color: #DC0E0E;
+        }
+
+        .nav-link {
+            color: #FFFFFF !important;
+            font-weight: 600;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #DC0E0E !important;
+        }
+
+        .search-bar {
+            position: relative;
+        }
+
+        .search-bar input {
+            background-color: #1a1a1a;
+            border: 1px solid #DC0E0E;
+            color: #FFFFFF;
+            border-radius: 25px;
+            padding: 8px 20px;
+        }
+
+        .search-bar input::placeholder {
+            color: #999;
+        }
+
+        .search-bar input:focus {
+            background-color: #1a1a1a;
+            color: #FFFFFF;
+            border-color: #DC0E0E;
+            box-shadow: 0 0 10px rgba(220, 14, 14, 0.3);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .hero-section .highlight {
+            color: #DC0E0E;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background-color: #DC0E0E;
+            border: none;
+            padding: 12px 35px;
+            font-weight: 700;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #b00b0b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(220, 14, 14, 0.4);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 60px 0 40px;
+            color: #FFFFFF;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #DC0E0E;
+            margin: 15px auto 0;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background-color: #1a1a1a;
+            color: #FFFFFF;
+            border: 2px solid #DC0E0E;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: #DC0E0E;
+            transform: scale(1.05);
+        }
+
+        .vehicle-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(220, 14, 14, 0.3);
+            border-color: #DC0E0E;
+        }
+
+        .vehicle-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .vehicle-card-body {
+            padding: 20px;
+        }
+
+        .vehicle-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+        }
+
+        .vehicle-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #DC0E0E;
+            margin-bottom: 15px;
+        }
+
+        .vehicle-specs {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .vehicle-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-favorite {
+            background-color: transparent;
+            border: 2px solid #DC0E0E;
+            color: #DC0E0E;
+            padding: 8px 15px;
+            border-radius: 8px;
+            flex: 1;
+            transition: all 0.3s;
+        }
+
+        .btn-favorite:hover,
+        .btn-favorite.active {
+            background-color: #DC0E0E;
+            color: #FFFFFF;
+        }
+
+        .btn-buy {
+            background-color: #DC0E0E;
+            border: none;
+            color: #FFFFFF;
+            padding: 8px 15px;
+            border-radius: 8px;
+            flex: 2;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-buy:hover {
+            background-color: #b00b0b;
+        }
+
+        .about-section {
+            background-color: #1a1a1a;
+            padding: 80px 0;
+            margin: 60px 0;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .profile-card {
+            background-color: #000000;
+            border: 2px solid #DC0E0E;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-card h4 {
+            color: #DC0E0E;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .profile-info {
+            text-align: left;
+        }
+
+        .profile-info p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .profile-info strong {
+            color: #DC0E0E;
+        }
+
+        footer {
+            background-color: #000000;
+            border-top: 2px solid #DC0E0E;
+            padding: 30px 0;
+            text-align: center;
+            color: #999;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            color: #FFFFFF;
+            border: 2px solid #DC0E0E;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #333;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #333;
+        }
+
+        .form-label {
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        .form-control,
+        .form-select {
+            background-color: #000000;
+            border: 1px solid #DC0E0E;
+            color: #FFFFFF;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background-color: #000000;
+            color: #FFFFFF;
+            border-color: #DC0E0E;
+            box-shadow: 0 0 10px rgba(220, 14, 14, 0.3);
+        }
+
+        .badge {
+            background-color: #DC0E0E;
+            color: #FFFFFF;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .vehicle-card img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">My<span>Otomotif</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#kategori">Kategori</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showFavorites(); return false;">
+                            <i class="bi bi-heart-fill"></i> Favorit <span class="badge" id="favCount">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <h1 class="animate-title">Temukan <span class="highlight">Kendaraan Sport</span> Impian Anda</h1>
+            <p class="animate-subtitle">Platform terpercaya untuk jual beli motor dan mobil sport berkualitas</p>
+            <div class="search-bar d-flex justify-content-center mt-4">
+                <input type="text" class="form-control w-50" id="searchInput" placeholder="Cari motor atau mobil sport...">
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Section -->
+    <section class="container" id="popular">
+        <h2 class="section-title">Paling Diminati</h2>
+        <div class="row" id="popularVehicles">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Category Section -->
+    <section class="container" id="kategori">
+        <h2 class="section-title">Kategori Kendaraan</h2>
+        <div class="category-tabs">
+            <button class="category-btn active" onclick="filterCategory('all')">Semua</button>
+            <button class="category-btn" onclick="filterCategory('motor')">Motor Sport</button>
+            <button class="category-btn" onclick="filterCategory('mobil')">Mobil Sport</button>
+        </div>
+        <div class="row" id="categoryVehicles">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>Tentang MyOtomotif</h2>
+                <p>MyOtomotif adalah platform jual beli kendaraan sport terpercaya yang menghubungkan pecinta otomotif di seluruh Indonesia. Kami menyediakan berbagai pilihan motor dan mobil sport berkualitas dengan harga terbaik.</p>
+                <p>Dengan sistem transaksi yang aman dan mudah, kami berkomitmen memberikan pengalaman terbaik bagi setiap pelanggan dalam menemukan kendaraan impian mereka.</p>
+                
+                <div class="profile-card">
+                    <h4>Profil Developer</h4>
+                    <div class="profile-info">
+                        <p><strong>Nama:</strong> Kevin Dwi Kumara Siri Manggalo</p>
+                        <p><strong>Semester:</strong> 5</p>
+                        <p><strong>Program Studi:</strong> Bisnis Digital</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 MyOtomotif. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Purchase Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Formulir Pembelian</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="purchaseForm">
+                        <input type="hidden" id="vehicleId">
+                        <div class="mb-3">
+                            <label class="form-label">Kendaraan</label>
+                            <input type="text" class="form-control" id="vehicleName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Harga</label>
+                            <input type="text" class="form-control" id="vehiclePrice" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="buyerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="buyerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nomor Telepon</label>
+                            <input type="tel" class="form-control" id="buyerPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Metode Pembayaran</label>
+                            <select class="form-select" id="paymentMethod" required>
+                                <option value="">Pilih Metode Pembayaran</option>
+                                <option value="transfer">Transfer Bank</option>
+                                <option value="credit">Kartu Kredit</option>
+                                <option value="cash">Cash/Tunai</option>
+                                <option value="kredit">Kredit/Cicilan</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" onclick="submitPurchase()">Proses Pembelian</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+        // Vehicle Data
+        const vehicles = [
+            {
+                id: 1,
+                name: 'Yamaha R1M',
+                type: 'motor',
+                price: 'Rp 485.000.000',
+                image: 'assets/MT1.jpg',
+                specs: '998cc | 200 HP | 6 Speed',
+                popular: true
+            },
+            {
+                id: 2,
+                name: 'Kawasaki Ninja H2',
+                type: 'motor',
+                price: 'Rp 650.000.000',
+                image: 'assets/MT2.jpg',
+                specs: '998cc | 231 HP | 6 Speed',
+                popular: true
+            },
+            {
+                id: 3,
+                name: 'Honda CBR1000RR',
+                type: 'motor',
+                price: 'Rp 425.000.000',
+                image: 'assets/MT3.jpg',
+                specs: '999cc | 189 HP | 6 Speed',
+                popular: false
+            },
+            {
+                id: 4,
+                name: 'Ducati Panigale V4',
+                type: 'motor',
+                price: 'Rp 890.000.000',
+                image: 'assets/MT4.jpg',
+                specs: '1103cc | 214 HP | 6 Speed',
+                popular: true
+            },
+            {
+                id: 5,
+                name: 'Ferrari 488 GTB',
+                type: 'mobil',
+                price: 'Rp 5.500.000.000',
+                image: 'assets/MB1.jpg',
+                specs: '3902cc | 670 HP | 7 Speed',
+                popular: true
+            },
+            {
+                id: 6,
+                name: 'Lamborghini Huracan',
+                type: 'mobil',
+                price: 'Rp 4.800.000.000',
+                image: 'assets/MB2.jpg',
+                specs: '5204cc | 640 HP | 7 Speed',
+                popular: true
+            },
+            {
+                id: 7,
+                name: 'Porsche 911 GT3',
+                type: 'mobil',
+                price: 'Rp 3.200.000.000',
+                image: 'assets/MB3.jpg',
+                specs: '3996cc | 510 HP | 7 Speed',
+                popular: false
+            },
+            {
+                id: 8,
+                name: 'McLaren 720S',
+                type: 'mobil',
+                price: 'Rp 6.200.000.000',
+                image: 'assets/MB4.jpg',
+                specs: '3994cc | 720 HP | 7 Speed',
+                popular: true
+            }
+        ];
+
+        // Initialize
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        let currentCategory = 'all';
+
+        // Load initial data
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPopularVehicles();
+            loadCategoryVehicles();
+            updateFavoriteCount();
+            initializeAnimations();
+            initializeSearch();
+        });
+
+        // Animations
+        function initializeAnimations() {
+            anime({
+                targets: '.animate-title',
+                translateY: [-50, 0],
+                opacity: [0, 1],
+                duration: 1000,
+                easing: 'easeOutExpo'
+            });
+
+            anime({
+                targets: '.animate-subtitle',
+                translateY: [50, 0],
+                opacity: [0, 1],
+                duration: 1000,
+                delay: 300,
+                easing: 'easeOutExpo'
+            });
+        }
+
+        // Load Popular Vehicles
+        function loadPopularVehicles() {
+            const container = document.getElementById('popularVehicles');
+            const popularVehicles = vehicles.filter(v => v.popular);
+            
+            container.innerHTML = popularVehicles.map(vehicle => createVehicleCard(vehicle)).join('');
+            animateCards();
+        }
+
+        // Load Category Vehicles
+        function loadCategoryVehicles() {
+            const container = document.getElementById('categoryVehicles');
+            let filteredVehicles = vehicles;
+            
+            if (currentCategory !== 'all') {
+                filteredVehicles = vehicles.filter(v => v.type === currentCategory);
+            }
+            
+            container.innerHTML = filteredVehicles.map(vehicle => createVehicleCard(vehicle)).join('');
+            animateCards();
+        }
+
+        // Create Vehicle Card
+        function createVehicleCard(vehicle) {
+            const isFavorite = favorites.includes(vehicle.id);
+            return `
+                <div class="col-md-6 col-lg-3">
+                    <div class="vehicle-card">
+                        <img src="${vehicle.image}" alt="${vehicle.name}" onerror="this.src='https://via.placeholder.com/400x250/1a1a1a/DC0E0E?text=${vehicle.name}'">
+                        <div class="vehicle-card-body">
+                            <h3 class="vehicle-title">${vehicle.name}</h3>
+                            <p class="vehicle-price">${vehicle.price}</p>
+                            <p class="vehicle-specs">${vehicle.specs}</p>
+                            <div class="vehicle-actions">
+                                <button class="btn-favorite ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(${vehicle.id})">
+                                    <i class="bi bi-heart${isFavorite ? '-fill' : ''}"></i>
+                                </button>
+                                <button class="btn-buy" onclick="openPurchaseModal(${vehicle.id})">
+                                    <i class="bi bi-cart"></i> Beli
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Animate Cards
+        function animateCards() {
+            anime({
+                targets: '.vehicle-card',
+                translateY: [30, 0],
+                opacity: [0, 1],
+                duration: 800,
+                delay: anime.stagger(100),
+                easing: 'easeOutExpo'
+            });
+        }
+
+        // Filter Category
+        function filterCategory(category) {
+            currentCategory = category;
+            
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            loadCategoryVehicles();
+        }
+
+        // Toggle Favorite
+        function toggleFavorite(vehicleId) {
+            const index = favorites.indexOf(vehicleId);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+            } else {
+                favorites.push(vehicleId);
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            updateFavoriteCount();
+            loadPopularVehicles();
+            loadCategoryVehicles();
+        }
+
+        // Update Favorite Count
+        function updateFavoriteCount() {
+            document.getElementById('favCount').textContent = favorites.length;
+        }
+
+        // Show Favorites
+        function showFavorites() {
+            const favoriteVehicles = vehicles.filter(v => favorites.includes(v.id));
+            
+            if (favoriteVehicles.length === 0) {
+                alert('Anda belum memiliki kendaraan favorit.');
+                return;
+            }
+            
+            const container = document.getElementById('categoryVehicles');
+            container.innerHTML = favoriteVehicles.map(vehicle => createVehicleCard(vehicle)).join('');
+            
+            // Scroll to category section
+            document.getElementById('kategori').scrollIntoView({ behavior: 'smooth' });
+            
+            // Update section title
+            document.querySelector('#kategori .section-title').textContent = 'Kendaraan Favorit Anda';
+            
+            animateCards();
+        }
+
+        // Open Purchase Modal
+        function openPurchaseModal(vehicleId) {
+            const vehicle = vehicles.find(v => v.id === vehicleId);
+            
+            document.getElementById('vehicleId').value = vehicle.id;
+            document.getElementById('vehicleName').value = vehicle.name;
+            document.getElementById('vehiclePrice').value = vehicle.price;
+            
+            const modal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+            modal.show();
+        }
+
+        // Submit Purchase
+        function submitPurchase() {
+            const form = document.getElementById('purchaseForm');
+            
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            const purchaseData = {
+                vehicleId: document.getElementById('vehicleId').value,
+                vehicleName: document.getElementById('vehicleName').value,
+                vehiclePrice: document.getElementById('vehiclePrice').value,
+                buyerName: document.getElementById('buyerName').value,
+                buyerEmail: document.getElementById('buyerEmail').value,
+                buyerPhone: document.getElementById('buyerPhone').value,
+                paymentMethod: document.getElementById('paymentMethod').value,
+                date: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            let purchases = JSON.parse(localStorage.getItem('purchases')) || [];
+            purchases.push(purchaseData);
+            localStorage.setItem('purchases', JSON.stringify(purchases));
+            
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('purchaseModal'));
+            modal.hide();
+            
+            // Reset form
+            form.reset();
+            
+            // Show success message
+            alert(`Terima kasih ${purchaseData.buyerName}! Pembelian Anda untuk ${purchaseData.vehicleName} sedang diproses. Kami akan menghubungi Anda segera.`);
+        }
+
+        // Initialize Search
+        function initializeSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                
+                if (searchTerm === '') {
+                    loadCategoryVehicles();
+                    return;
+                }
+                
+                const filteredVehicles = vehicles.filter(v => 
+                    v.name.toLowerCase().includes(searchTerm) ||
+                    v.specs.toLowerCase().includes(searchTerm)
+                );
+                
+                const container = document.getElementById('categoryVehicles');
+                
+                if (filteredVehicles.length === 0) {
+                    container.innerHTML = `
+                        <div class="col-12 text-center">
+                            <p style="font-size: 1.2rem; color: #999; margin: 50px 0;">
+                                Tidak ada kendaraan yang ditemukan untuk "${searchTerm}"
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = filteredVehicles.map(vehicle => createVehicleCard(vehicle)).join('');
+                    animateCards();
+                }
+                
+                // Scroll to results
+                document.getElementById('kategori').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+</html>
